@@ -323,7 +323,7 @@ export const SCORE_BANDS: ScoreBand[] = [
     max: 15,
     label: "Sintomas Ausentes ou Mínimos",
     color: "#22c55e",
-    msg: "De acordo com suas respostas, você não apresenta sintomas sem impacto perceptível nas atividades diárias.anormais.",
+    msg: "De acordo com suas respostas, você não apresenta sintomas com impacto perceptível nas atividades diárias.",
   },
   {
     min: 16,
