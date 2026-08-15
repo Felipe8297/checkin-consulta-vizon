@@ -42,12 +42,12 @@ const ESCALA_FREQ2: Option[] = [
 
 const ESCALA_INTENS: Option[] = [
   // intensidade (caixinhas 0–5)
-  { label: "Nunca senti", points: 0 },
-  { label: "Intensidade mínima", points: 1 },
-  { label: "Pouco intenso", points: 2 },
-  { label: "Intenso", points: 3 },
-  { label: "Muito intenso", points: 4 },
   { label: "Intensidade máxima", points: 5 },
+  { label: "Muito intenso", points: 4 },
+  { label: "Intenso", points: 3 },   
+  { label: "Pouco intenso", points: 2 }, 
+  { label: "Intensidade mínima", points: 1 }, 
+  { label: "Nunca senti", points: 0 },
 ];
 
 // --- Perguntas ---------------------------------------------------------------
