@@ -321,14 +321,14 @@ export const SCORE_BANDS: ScoreBand[] = [
   {
     min: 0,
     max: 15,
-    label: "Sintomas Ausentes ou Mínimos",
+    label: "Sintomas Mínimos",
     color: "#22c55e",
     msg: "De acordo com suas respostas, você não apresenta sintomas com impacto perceptível nas atividades diárias.",
   },
   {
     min: 16,
     max: 29,
-    label: "Desconforto Leve",
+    label: "Sintomas Leves",
     color: "#eab308",
     msg: "De acordo com suas respostas, você apresenta leves sintomas de desconforto ocular, sugerimos informar ao seu médico sobre essa condição e como tratá-la.",
   },
