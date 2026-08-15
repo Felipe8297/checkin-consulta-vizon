@@ -33,11 +33,11 @@ const ESCALA_FREQ: Option[] = [
 
 const ESCALA_FREQ2: Option[] = [
   // frequência (caixinhas 0–4)
-  { label: "Nunca", points: 0 },
-  { label: "Raramente", points: 1 },
-  { label: "Às vezes", points: 2 },
-  { label: "Frequentemente", points: 3 },
   { label: "Constantemente", points: 4 },
+  { label: "Frequentemente", points: 3 },
+  { label: "Às vezes", points: 2 },
+  { label: "Raramente", points: 1 },  
+  { label: "Nunca senti", points: 0 },
 ];
 
 const ESCALA_INTENS: Option[] = [
@@ -261,7 +261,7 @@ export const QUESTIONS: Question[] = [
     multi: false,
     options: ESCALA_FREQ,
   },
-
+  // === SEÇÃO: frequência e intensidade nos últimos 30 dias ===
   {
     id: "p19",
     text: "Durante um dia típico do mês passado, com qual frequência sentiu Desconforto Ocular?",
