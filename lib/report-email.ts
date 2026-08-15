@@ -35,6 +35,9 @@ export async function sendReportEmail(input: ReportEmailInput): Promise<string> 
     ? `Triagem Olho Seco — ${nome} — Score ${input.score} (${input.band})`
     : `Triagem Olho Seco — Score ${input.score} (${input.band})`;
 
+  // Remove o cabeçalho "data:application/pdf;base64," caso exista no Base64
+  const cleanBase64 = input.pdfBase64.replace(/^data:application\/pdf;base64,/, "");
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -46,21 +49,24 @@ export async function sendReportEmail(input: ReportEmailInput): Promise<string> 
       to: [to],
       subject,
       html: `<p>Relatório de triagem em anexo.</p>
-             <table style="border-collapse:collapse;font-size:14px;margin:8px 0">
-               <tr><td style="padding:2px 12px 2px 0;color:#5a6478">Paciente</td><td><b>${nome || "—"}</b></td></tr>
-               <tr><td style="padding:2px 12px 2px 0;color:#5a6478">Idade</td><td>${esc(p.idade) || "—"}</td></tr>
-               <tr><td style="padding:2px 12px 2px 0;color:#5a6478">Telefone</td><td>${esc(p.telefone) || "—"}</td></tr>
-               <tr><td style="padding:2px 12px 2px 0;color:#5a6478">Score</td><td><b>${input.score}</b> — faixa <b>${input.band}</b></td></tr>
-             </table>
-             <p style="color:#5a6478;font-size:12px">Enviado automaticamente pelo formulário de triagem da recepção.</p>`,
-     attachments: [{ filename: input.filename, content: input.pdfBase64 }],
-  }),
-});
+        <table style="border-collapse:collapse;font-size:14px;margin:8px 0">
+          <tr><td style="padding:2px 12px 2px 0;color:#5a6478">Paciente</td><td><b>${nome || "-"}</b></td></tr>
+          <tr><td style="padding:2px 12px 2px 0;color:#5a6478">Idade</td><td>${esc(p.idade) || "-"}</td></tr>
+          <tr><td style="padding:2px 12px 2px 0;color:#5a6478">Telefone</td><td>${esc(p.telefone) || "-"}</td></tr>
+          <tr><td style="padding:2px 12px 2px 0;color:#5a6478">Score</td><td><b>${input.score}</b> – faixa <b>${input.band}</b></td></tr>
+        </table>
+        <p style="color:#5a6478;font-size:12px">Enviado automaticamente pelo formulário de triagem da recepção.</p>`,
+      attachments: [{ filename: input.filename, content: cleanBase64 }],
+    }),
+  });
 
-const text = await res.text();
-console.log("==> RESPOSTA STATUS:", res.status);
-console.log("==> RESPOSTA CORPO:", text);
+  const responseData = await res.json();
 
-if (!res.ok) throw new Error(`Falha no envio (Resend) ${res.status}: ${text}`);
-return text;
+  if (!res.ok) {
+    console.error("==> ERRO RESEND:", responseData);
+    throw new Error(`Falha no envio (${res.status}): ${JSON.stringify(responseData)}`);
+  }
+
+  console.log("==> SUCESSO RESEND:", responseData);
+  return JSON.stringify(responseData);
 }
