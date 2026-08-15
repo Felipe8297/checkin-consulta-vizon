@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR" className={`${display.variable} ${body.variable}`}>
       <body className="font-sans antialiased">
         {children}
-            </body>
+      </body>
     </html>
   );
 }
