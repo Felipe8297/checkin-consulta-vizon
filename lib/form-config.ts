@@ -355,4 +355,4 @@ export const SCORE_MAX_ESCALA = 100;
 export const BAND_TICKS = [20, 40, 60];
 
 // Segundos até o reset automático (modo kiosk).
-export const KIOSK_RESET_SECONDS = 30;
+export const KIOSK_RESET_SECONDS = 20;
