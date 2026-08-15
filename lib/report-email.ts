@@ -53,11 +53,14 @@ export async function sendReportEmail(input: ReportEmailInput): Promise<string> 
                <tr><td style="padding:2px 12px 2px 0;color:#5a6478">Score</td><td><b>${input.score}</b> — faixa <b>${input.band}</b></td></tr>
              </table>
              <p style="color:#5a6478;font-size:12px">Enviado automaticamente pelo formulário de triagem da recepção.</p>`,
-      attachments: [{ filename: input.filename, content: input.pdfBase64 }],
-    }),
-  });
+     attachments: [{ filename: input.filename, content: input.pdfBase64 }],
+  }),
+});
 
-  const text = await res.text();
-  if (!res.ok) throw new Error(`Falha no envio (Resend) ${res.status}: ${text}`);
-  return text;
+const text = await res.text();
+console.log("==> RESPOSTA STATUS:", res.status);
+console.log("==> RESPOSTA CORPO:", text);
+
+if (!res.ok) throw new Error(`Falha no envio (Resend) ${res.status}: ${text}`);
+return text;
 }
