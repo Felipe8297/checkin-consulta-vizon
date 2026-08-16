@@ -352,7 +352,11 @@ export const SCORE_BANDS: ScoreBand[] = [
 export const SCORE_MAX_ESCALA = 100;
 
 // Marcadores das faixas desenhados na régua do termômetro.
-export const BAND_TICKS = [20, 40, 60];
+// Derivados de SCORE_BANDS para nunca divergirem das faixas reais: cada tick
+// é o limite superior de uma faixa (15, 29, 50), exceto o da última.
+export const BAND_TICKS = SCORE_BANDS.slice(0, -1)
+  .map((b) => b.max)
+  .filter((max) => max <= SCORE_MAX_ESCALA);
 
 // Segundos até o reset automático (modo kiosk).
 export const KIOSK_RESET_SECONDS = 20;

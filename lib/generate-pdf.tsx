@@ -54,9 +54,16 @@ const s = StyleSheet.create({
     padding: 12,
     marginBottom: 22,
   },
+  // Largura proporcional ao conteúdo de cada campo: "Idade" cabe em pouco
+  // espaço, "Data" precisa de mais para a hora não quebrar de linha.
   patientItem: { flex: 1, paddingRight: 4 },
+  patientItemNome: { flex: 2, paddingRight: 4 },
+  patientItemCpf: { flex: 1.4, paddingRight: 4 },
+  patientItemIdade: { flex: 0.5, paddingRight: 4 },
+  patientItemTelefone: { flex: 1.4, paddingRight: 4 },
+  patientItemData: { flex: 1.6, paddingRight: 0 },
   patientLabel: { fontSize: 8, color: MUTE, textTransform: "uppercase", letterSpacing: 0.5 },
-  patientValue: { fontSize: 12, color: TEXT, fontFamily: "Helvetica-Bold" },
+  patientValue: { fontSize: 10, color: TEXT, fontFamily: "Helvetica-Bold" },
   eyebrow: {
     fontSize: 9,
     color: AMBER,
@@ -153,23 +160,23 @@ function ReportDoc({ answers, score, band, dateStr, patient, logoSrc }: ReportDa
             <>
               <Text style={s.eyebrow}>Paciente</Text>
               <View style={s.patientBox}>
-                <View style={s.patientItem}>
+                <View style={s.patientItemNome}>
                   <Text style={s.patientLabel}>Nome</Text>
                   <Text style={s.patientValue}>{patient.nome || "—"}</Text>
                 </View>
-                <View style={s.patientItem}>
+                <View style={s.patientItemCpf}>
                   <Text style={s.patientLabel}>CPF</Text>
                   <Text style={s.patientValue}>{patient.cpf || "—"}</Text>
                 </View>
-                <View style={s.patientItem}>
+                <View style={s.patientItemIdade}>
                   <Text style={s.patientLabel}>Idade</Text>
                   <Text style={s.patientValue}>{patient.idade || "—"}</Text>
                 </View>
-                <View style={s.patientItem}>
+                <View style={s.patientItemTelefone}>
                   <Text style={s.patientLabel}>Telefone</Text>
                   <Text style={s.patientValue}>{patient.telefone || "—"}</Text>
                 </View>
-                <View style={s.patientItem}>
+                <View style={s.patientItemData}>
                   <Text style={s.patientLabel}>Data</Text>
                   <Text style={s.patientValue}>{dateStr}</Text>
                 </View>
