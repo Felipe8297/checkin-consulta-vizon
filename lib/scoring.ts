@@ -14,9 +14,16 @@ export function calcScore(answers: Record<string, string[]>): number {
   }, 0);
 }
 
-/** Faixa correspondente ao score: min <= score < max. */
+/**
+ * Faixa correspondente ao score: min <= score <= max (máximo INCLUSIVO —
+ * as faixas são declaradas como 0–15, 16–29, 30–50, 51+).
+ */
 export function getBand(score: number): ScoreBand {
-  return SCORE_BANDS.find((b) => score >= b.min && score < b.max) ?? SCORE_BANDS[0];
+  const faixa = SCORE_BANDS.find((b) => score >= b.min && score <= b.max);
+  if (faixa) return faixa;
+  // Fora de qualquer faixa: abaixo do mínimo cai na primeira; acima do
+  // máximo cai na última (nunca subestima o sintoma).
+  return score < SCORE_BANDS[0].min ? SCORE_BANDS[0] : SCORE_BANDS[SCORE_BANDS.length - 1];
 }
 
 /** Pontos de uma única pergunta (para o detalhamento no PDF). */
